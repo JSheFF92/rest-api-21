@@ -1,21 +1,23 @@
 package in.reqres;
 
+import io.restassured.RestAssured;
 import org.junit.jupiter.api.Test;
 
-import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.*;
 import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.Matchers.is;
 
-public class FiveTestsApi {
+public class FiveTestsApi extends TestBase{
 
     @Test
-    void getStatus200AndId() {
+    void getStatus200AndIdTest() {
         given()
                 .log().uri()
                 .log().method()
                 .log().body()
                 .contentType(JSON)
-                .get("https://reqres.in/api/users/2")
+//                .get("https://reqres.in/api/users/2")
+                .get(baseURI + basePath + "/users/2")
                 .then()
                 .log().status()
                 .log().body()
@@ -24,7 +26,7 @@ public class FiveTestsApi {
     }
 
     @Test
-    void listUsers() {
+    void listUsersTest() {
         given()
                 .log().uri()
                 .log().method()
@@ -40,7 +42,7 @@ public class FiveTestsApi {
     }
 
     @Test
-    void createUser() {
+    void createUserTest() {
         given()
                 .log().uri()
                 .log().method()
@@ -56,7 +58,7 @@ public class FiveTestsApi {
     }
 
     @Test
-    void putUser() {
+    void putUserTest() {
         String id = given()
 //                .log().uri()
                 .log().method()
@@ -86,7 +88,7 @@ public class FiveTestsApi {
     }
 
     @Test
-    void deleteUser() {
+    void deleteUserTest() {
         String id = given()
                 .log().uri()
                 .log().method()
