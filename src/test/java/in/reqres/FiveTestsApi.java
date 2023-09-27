@@ -1,6 +1,6 @@
 package in.reqres;
 
-import io.restassured.RestAssured;
+
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.*;
@@ -32,7 +32,7 @@ public class FiveTestsApi extends TestBase{
                 .log().method()
                 .log().body()
                 .contentType(JSON)
-                .get("https://reqres.in/api/users?page=2")
+                .get(baseURI + basePath + "/users?page=2")
                 .then()
                 .log().status()
                 .log().body()
@@ -50,7 +50,7 @@ public class FiveTestsApi extends TestBase{
                 .contentType(JSON)
                 .body("{ \"name\": \"Jenya\", \"job\": \"QA\" }")
                 .when()
-                .post("https://reqres.in/api/users")
+                .post(baseURI + basePath + "/users")
                 .then()
                 .log().status()
                 .log().body()
@@ -66,7 +66,7 @@ public class FiveTestsApi extends TestBase{
                 .contentType(JSON)
                 .body("{ \"name\": \"Jenya\", \"job\": \"QA\" }")
                 .when()
-                .post("https://reqres.in/api/users")
+                .post(baseURI + basePath + "/users")
                 .then()
                 .log().status()
 //                .log().body()
@@ -78,7 +78,7 @@ public class FiveTestsApi extends TestBase{
                 .log().body()
                 .contentType(JSON)
                 .body("{ \"name\": \"SuperJenya\", \"job\": \"MEGAULTRAQA\" }")
-                .put("https://reqres.in/api/users/2/" + id)
+                .put(baseURI + basePath + "/users/2/" + id)
                 .then()
                 .log().status()
                 .log().body()
@@ -96,7 +96,7 @@ public class FiveTestsApi extends TestBase{
                 .contentType(JSON)
                 .body("{ \"name\": \"Jenya\", \"job\": \"QA\" }")
                 .when()
-                .post("https://reqres.in/api/users")
+                .post(baseURI + basePath + "/users")
                 .then()
                 .log().status()
                 .log().body()
@@ -106,7 +106,7 @@ public class FiveTestsApi extends TestBase{
         given()
                 .log().uri()
                 .when()
-                .delete("https://reqres.in/api/users/2" + id)
+                .delete(baseURI + basePath + "/users/2" + id)
                 .then()
                 .log().status()
                 .log().body()
