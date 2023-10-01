@@ -3,9 +3,8 @@ package in.reqres.models;
 import lombok.Data;
 
 @Data
-public class ThreeTestCreateResponseModel {
+public class PutResponseUserModel {
     String name;
     String job;
-    Integer id;
-    String createdAt;
+    String updatedAt;
 }

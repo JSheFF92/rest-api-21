@@ -21,18 +21,19 @@ public class Specs extends TestBase {
             .baseUri(config.BaseUrl())
             .basePath(config.BasePath());
 
-    public static ResponseSpecification response = new ResponseSpecBuilder()
+    public static ResponseSpecification responseSpecWithStatusCode200 = new ResponseSpecBuilder()
             .log(STATUS)
             .log(BODY)
             .expectStatusCode(200)
             .build();
 
-    public static ResponseSpecification responseCreate = new ResponseSpecBuilder()
+    public static ResponseSpecification responseSpecWithStatusCode201 = new ResponseSpecBuilder()
             .log(STATUS)
             .log(BODY)
             .expectStatusCode(201)
             .build();
-    public static ResponseSpecification responseDelete = new ResponseSpecBuilder()
+    public static ResponseSpecification responseSpecWithStatusCode204 = new ResponseSpecBuilder()
             .expectStatusCode(204)
+            .log(STATUS)
             .build();
 }

@@ -6,13 +6,13 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class TwoTestGetListUsers {
+public class GetListUsersModel {
     int page;
     @JsonProperty("per_page")
     int perPage;
     int total;
     @JsonProperty("total_pages")
     int totalPages;
-    List<TwoTestListUsersDataResponseModel> data;
-    TwoTestListUsersSupportDataResponseModel support;
+    List<ListUsersDataResponseModel> data;
+    ListUsersSupportDataResponseModel support;
 }

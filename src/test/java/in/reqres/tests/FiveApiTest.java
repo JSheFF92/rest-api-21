@@ -13,16 +13,16 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class FiveApiNewTest {
+public class FiveApiTest {
 
     @Test
     void getFirstAndLastNameAndIdTest() {
-        OneTestUserData data = step("Получаем массив пользователя", () ->
+        DataModel data = step("Получаем массив пользователя", () ->
                 given(request)
                         .get("/users/2")
                         .then()
-                        .spec(response)
-                        .extract().as(OneTestUserData.class));
+                        .spec(responseSpecWithStatusCode200)
+                        .extract().as(DataModel.class));
 
         step("Проверяем Id, First Name, Last Name", () -> {
             assertEquals(2, data.getUser().getId());
@@ -33,15 +33,15 @@ public class FiveApiNewTest {
 
     @Test
     void listUsersTest() {
-        TwoTestGetListUsers responseUsers = step("Получаем массив пользователей", () ->
+        GetListUsersModel responseUsers = step("Получаем массив пользователей", () ->
                 given(request)
                         .get("/users?page=2")
                         .then()
-                        .spec(response)
-                        .extract().as(TwoTestGetListUsers.class));
+                        .spec(responseSpecWithStatusCode200)
+                        .extract().as(GetListUsersModel.class));
 
         step("Проверяем данные в массиве", () -> {
-            List<TwoTestListUsersDataResponseModel> data = responseUsers.getData();
+            List<ListUsersDataResponseModel> data = responseUsers.getData();
             assertEquals("Byron", data.get(3).getFirstName());
             assertEquals("Fields", data.get(3).getLastName());
             assertEquals(9, responseUsers.getData().get(2).getId());
@@ -54,18 +54,18 @@ public class FiveApiNewTest {
 
     @Test
     void createUserTest() {
-        ThreeTestCreateBodyUserModel body = new ThreeTestCreateBodyUserModel();
+        CreateBodyUserModel body = new CreateBodyUserModel();
         body.setName("Jenya");
         body.setJob("QA");
 
-        ThreeTestCreateResponseModel responseNewUser = step("Создаем пользователя с заданными Name и Job", () ->
+        CreateResponseModel responseNewUser = step("Создаем пользователя с заданными Name и Job", () ->
                 given(request)
                         .body(body)
                         .when()
                         .post("/users")
                         .then()
-                        .spec(responseCreate)
-                        .extract().as(ThreeTestCreateResponseModel.class));
+                        .spec(responseSpecWithStatusCode201)
+                        .extract().as(CreateResponseModel.class));
 
         step("Проверяем созданного пользователя с заданными параметрами", () -> {
             assertEquals("Jenya", responseNewUser.getName());
@@ -77,28 +77,16 @@ public class FiveApiNewTest {
 
     @Test
     void putUserTest() {
-        ThreeTestCreateBodyUserModel body = new ThreeTestCreateBodyUserModel();
-        body.setName("Jenya");
-        body.setJob("QA");
-        String id = step("Получаем айди созданного пользователя с заданными Name и Job", () ->
-                given(request)
-                        .body(body)
-                        .when()
-                        .post("/users")
-                        .then()
-                        .spec(responseCreate)
-                        .extract().path("id"));
-
-        FourTestPutBodyUserModel updateBody = new FourTestPutBodyUserModel();
+        BodyUserModel updateBody = new BodyUserModel();
         updateBody.setName("SuperJenya");
         updateBody.setJob("MEGAULTRAQA");
-        FourTestPutResponseUserModel responseUpdateUser = step("Обновляем Name и Job пользователю", () ->
+        PutResponseUserModel responseUpdateUser = step("Обновляем Name и Job пользователю", () ->
                 given(request)
                         .body(updateBody)
-                        .put("/users/2/" + id)
+                        .put("/users/2/")
                         .then()
-                        .spec(response)
-                        .extract().as(FourTestPutResponseUserModel.class));
+                        .spec(responseSpecWithStatusCode200)
+                        .extract().as(PutResponseUserModel.class));
 
         step("Проверяем изменения", () -> {
             assertEquals("SuperJenya", responseUpdateUser.getName());
@@ -109,24 +97,12 @@ public class FiveApiNewTest {
 
     @Test
     void deleteUserTest() {
-        ThreeTestCreateBodyUserModel body = new ThreeTestCreateBodyUserModel();
-        body.setName("Jenya");
-        body.setJob("QA");
-        String id = step("Создаем пользователя с заданными Name и Job", () ->
-                given(request)
-                        .body(body)
-                        .when()
-                        .post("/users")
-                        .then()
-                        .spec(responseCreate)
-                        .extract().path("id"));
-
         step("Проверяем статус удаления пользователя", () -> {
                 given(request)
-                        .delete("/users/2" + id)
+                        .delete("/users/2")
                         .then()
                         .log().body()
-                        .spec(responseDelete);
+                        .spec(responseSpecWithStatusCode204);
         });
     }
 }

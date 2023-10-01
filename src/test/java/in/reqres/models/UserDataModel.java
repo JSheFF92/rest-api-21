@@ -3,6 +3,6 @@ package in.reqres.models;
 import lombok.Data;
 
 @Data
-public class OneTestUserDataModel {
+public class UserDataModel {
     String data;
 }
