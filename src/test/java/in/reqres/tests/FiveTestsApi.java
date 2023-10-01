@@ -1,22 +1,22 @@
-package in.reqres;
+package in.reqres.tests;
 
 
+import in.reqres.TestBase;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.*;
 import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.Matchers.is;
 
-public class FiveTestsApi extends TestBase{
+public class FiveTestsApi extends TestBase {
 
     @Test
-    void getStatus200AndIdTest() {
+    void getStatusAndIdTest() {
         given()
                 .log().uri()
                 .log().method()
                 .log().body()
                 .contentType(JSON)
-//                .get("https://reqres.in/api/users/2")
                 .get("/users/2")
                 .then()
                 .log().status()
