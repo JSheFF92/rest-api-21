@@ -1,11 +1,9 @@
 package in.reqres.tests;
 
 
-import in.reqres.TestBase;
 import in.reqres.models.*;
 import org.junit.jupiter.api.Test;
 
-import static in.reqres.helpers.CustomAllureListener.withCustomTemplates;
 import static in.reqres.specs.Specs.*;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;

@@ -1,4 +1,4 @@
-package in.reqres;
+package in.reqres.tests;
 
 import in.reqres.config.ApiConfig;
 import io.restassured.RestAssured;
