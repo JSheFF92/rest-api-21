@@ -8,5 +8,5 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DataModel {
     @JsonProperty("data")
-    private UserModel user;
+    private ListUsersDataResponseModel user;
 }

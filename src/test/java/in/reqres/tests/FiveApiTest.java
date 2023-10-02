@@ -54,7 +54,7 @@ public class FiveApiTest {
 
     @Test
     void createUserTest() {
-        CreateBodyUserModel body = new CreateBodyUserModel();
+        BodyUserModel body = new BodyUserModel();
         body.setName("Jenya");
         body.setJob("QA");
 

@@ -1,5 +1,6 @@
 package in.reqres.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
@@ -11,5 +12,6 @@ public class ListUsersDataResponseModel {
     String firstName;
     @JsonProperty("last_name")
     String lastName;
+    @JsonIgnoreProperties(ignoreUnknown = true)
     String avatar;
 }
